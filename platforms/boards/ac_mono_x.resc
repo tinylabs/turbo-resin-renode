@@ -1,0 +1,5 @@
+# Update PATH
+path add @peripherals
+
+# Include custom peripherals
+include @EEPROM_24CxxA.cs
