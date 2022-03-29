@@ -4,3 +4,5 @@ using "platforms/cpus/stm32f407.repl"
 
 // Add external peripherals here...
 eeprom: Miscellaneous.EEPROM_24CxxA @ i2c2 0x54
+    size: 512
+

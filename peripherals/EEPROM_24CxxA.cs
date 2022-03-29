@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using Antmicro.Renode.Exceptions;
 using Antmicro.Renode.Logging;
 using Antmicro.Renode.Peripherals.I2C;
@@ -20,9 +21,18 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
 {
     public class EEPROM_24CxxA : II2CPeripheral
     {
-        public EEPROM_24CxxA()
+        // Backing store
+        private byte[] storage;
+        private int size;
+
+        // Device state
+        private byte highAddress;
+        private byte lowAddress;
+
+        public EEPROM_24CxxA(int size = 256)
         {
-            Array.Copy(configdata, storage, configdata.Length);
+            this.size = size;
+            storage = new byte[size];
         }
 
         public byte[] Read(int count = 1)
@@ -85,9 +95,24 @@ namespace Antmicro.Renode.Peripherals.Miscellaneous
         {
         }
 
-        private byte[] configdata = {0x30, 0x78, 0x42, 0x43, 0x01, 0x50, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xE7, 0xE7, 0xE7, 0xE7, 0xE7, 0x03};
-        private byte[] storage = new byte[8192];
-        private byte highAddress;
-        private byte lowAddress;
+        public void LoadBinary(string fileName)
+        {
+            try
+            {
+                using(var reader = new FileStream(fileName, FileMode.Open, FileAccess.Read))
+                {
+                    var read = reader.Read(this.storage, 0, this.size);
+                    if(read != this.size)
+                    {
+                        throw new RecoverableException($"Error while loading file {fileName}: file is too small");
+                    }
+                }
+            }
+            catch(IOException e)
+            {
+                throw new RecoverableException(string.Format("Exception while loading file {0}: {1}", fileName, e.Message));
+            }
+        }
+
     }
 }

@@ -14,7 +14,7 @@ machine LoadPlatformDescription @platforms/boards/ac_mono_x.repl
 sysbus LoadBinary @assets/ac_mono_x/fw_v3.5.4.bin 0x00000000
 
 # Load eeprom contents
-
+eeprom LoadBinary @assets/ac_mono_x/eeprom.bin
 
 # Setup logs
 # sysbus LogAllPeripheralAccessm
