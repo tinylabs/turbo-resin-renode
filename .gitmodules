@@ -1,0 +1,6 @@
+[submodule "renode/renode"]
+	path = renode/renode
+	url = https://github.com/tinylabs/renode
+[submodule "renode/renode-infrastructure"]
+	path = renode/renode-infrastructure
+	url = https://github.com/tinylabs/renode-infrastructure
