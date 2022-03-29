@@ -4,6 +4,7 @@ Directory structure:
 scripts/ - This is where the renode scripts live. There will be at least one per printer (possibly one per debug config).  
 platforms/boards/ - These will correspond one-to-one with each printer board (possibly each printer board revision).  
 platforms/cpus/ - These will be extensions on CPUs to account for a specific model. ie: STM32F407 built on the base STM32F4.  
+peripherals/ - Our peripheral extensions.  
 
 Once renode is installed or compiled add it to your PATH variable.  
 Scripts can then be run with:  
