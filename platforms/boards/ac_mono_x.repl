@@ -1,0 +1,5 @@
+// Anycubic mono x revision v2.0.1
+
+using "platforms/cpus/stm32f407.repl"
+
+// Add external peripherals here...

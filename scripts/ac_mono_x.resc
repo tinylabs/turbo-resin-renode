@@ -1,0 +1,17 @@
+:name: ac_mono_x
+:description: 8.9" 4k MSLA printer
+
+mach create "ac_mono_x"
+machine LoadPlatformDescription @platforms/boards/ac_mono_x.repl
+
+# Can we move this to stm32f4x.repl somehow?
+sysbus.cpu VectorTableOffset 0x08000000
+# Load main binary
+sysbus LoadBinary @assets/ac_mono_x/fw_v3.5.4.bin 0x08000000
+
+# Load eeprom
+
+machine StartGdbServer 3333
+
+# Start machine
+start
