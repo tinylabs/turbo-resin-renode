@@ -7,10 +7,10 @@ include @platforms/boards/ac_mono_x.resc
 mach create "ac_mono_x"
 machine LoadPlatformDescription @platforms/boards/ac_mono_x.repl
 
-# Uncomment the next two lines and comment the following to catch NULL
-# derefs in original code
-#sysbus.cpu VectorTableOffset 0x08000000
-#sysbus LoadBinary @assets/ac_mono_x/fw_v3.5.4.bin 0x08000000
+
+sysbus.cpu PerformanceInMips 125
+
+sysbus.cpu VectorTableOffset 0x00008000
 sysbus LoadBinary @assets/ac_mono_x/fw_v3.5.4.bin 0x00000000
 
 # Load eeprom contents
@@ -25,6 +25,9 @@ sysbus LogPeripheralAccess sysbus.gpioPortB True
 # Setup analyzers
 
 machine StartGdbServer 3333
+
+logLevel -1 sysbus.i2c2
+#logFile @renode.log
 
 # Start machine
 start
