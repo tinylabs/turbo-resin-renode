@@ -3,6 +3,8 @@ path add @peripherals
 
 # Include custom peripherals
 include @EEPROM_24CxxA.cs
+include @SPIFlash.cs
 
 # Create alias
 alias eeprom sysbus.i2c2.eeprom
+alias spiflash sysbus.spi2.spiflash

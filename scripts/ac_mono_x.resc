@@ -10,7 +10,8 @@ machine LoadPlatformDescription @platforms/boards/ac_mono_x.repl
 
 sysbus.cpu PerformanceInMips 125
 
-sysbus.cpu VectorTableOffset 0x00008000
+#sysbus.cpu VectorTableOffset 0x00008000
+sysbus.cpu VectorTableOffset 0x00000000
 sysbus LoadBinary @assets/ac_mono_x/fw_v3.5.4.bin 0x00000000
 
 # Load eeprom contents
@@ -18,8 +19,8 @@ eeprom LoadBinary @assets/ac_mono_x/eeprom.bin
 
 # Setup logs
 # sysbus LogAllPeripheralAccessm
-sysbus LogPeripheralAccess sysbus.rcc  True
-sysbus LogPeripheralAccess sysbus.i2c2 True
+sysbus LogPeripheralAccess sysbus.rcc  False
+sysbus LogPeripheralAccess sysbus.i2c2 False
 sysbus LogPeripheralAccess sysbus.gpioPortB True
 
 # Setup analyzers
@@ -27,6 +28,9 @@ sysbus LogPeripheralAccess sysbus.gpioPortB True
 machine StartGdbServer 3333
 
 logLevel -1 sysbus.i2c2
+logLevel -1 sysbus.i2c2.eeprom
+logLevel -1 sysbus.spi2.spiflash
+
 #logFile @renode.log
 
 # Start machine

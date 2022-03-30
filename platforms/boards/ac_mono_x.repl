@@ -6,3 +6,5 @@ using "platforms/cpus/stm32f407.repl"
 eeprom: Miscellaneous.EEPROM_24CxxA @ i2c2 0xA0
     size: 512
 
+spiflash: Miscellaneous.SPIFlash @ spi2
+
